@@ -1,4 +1,3 @@
-
 strip = neopixel.create(DigitalPin.P0, 60, NeoPixelMode.RGB)
 wave_1 = [0,0]
 wave_2 = [0,0]
@@ -39,17 +38,18 @@ for index in range(60):
     wave_1[index] = (wave_1_strength(index)+5)
     wave_2[index]  = (wave_2_strength(index)+5)
 
-count = 1
-
 def on_forever():
+    global count
     basic.pause(100)
     rotate_led_strengths(wave_1)
-    if count == 1:
+    led.plot(count,1)
+    if count == 0:
+        led.plot(count,count)
         rotate_led_strengths(wave_2)
-        count = 0
-    else:
         count = 1
-
+    else:
+        led.plot(count,count)
+        count = 0
     show_leds()
     strip.show()
 

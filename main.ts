@@ -50,16 +50,18 @@ for (let index = 0; index < 60; index++) {
     wave_1[index] = wave_1_strength(index) + 5
     wave_2[index] = wave_2_strength(index) + 5
 }
-count = 1
 basic.forever(function on_forever() {
-    let count: number;
+    
     basic.pause(100)
     rotate_led_strengths(wave_1)
-    if (count == 1) {
+    led.plot(count, 1)
+    if (count == 0) {
+        led.plot(count, count)
         rotate_led_strengths(wave_2)
-        count = 0
-    } else {
         count = 1
+    } else {
+        led.plot(count, count)
+        count = 0
     }
     
     show_leds()
